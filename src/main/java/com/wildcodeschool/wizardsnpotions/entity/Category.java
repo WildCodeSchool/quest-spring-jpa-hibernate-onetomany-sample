@@ -12,7 +12,7 @@ public class Category {
     private Long id;
     private String title;
 
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     private List<Potion> potions = new ArrayList<>();
 
     public Category() {

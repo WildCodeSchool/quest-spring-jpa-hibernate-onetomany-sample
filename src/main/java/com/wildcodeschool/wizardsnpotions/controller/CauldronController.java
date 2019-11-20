@@ -24,7 +24,7 @@ public class CauldronController {
     CategoryRepository categoryRepository;
 
     @GetMapping("/")
-    public String init(Model out) {
+    public String init() {
 
         // remove all categories and potions
         potionRepository.deleteAll();
@@ -41,27 +41,36 @@ public class CauldronController {
         potionRepository.save(new Potion("A Vial of Nymph Breath", 4, restoration));
         potionRepository.save(new Potion("A Draught of Youth", 8, restoration));
 
-        out.addAttribute("categoryId", restoration.getId());
-
-        return "redirect:/potions?categoryId=" + restoration.getId();
+        return "redirect:/potions?idCategory=" + restoration.getId();
     }
 
     @GetMapping("/potions")
     public String getPotions(Model out,
-                              @RequestParam(required = false) Long categoryId) {
+                              @RequestParam(required = false) Long idCategory) {
 
-        if (categoryId == null) {
+        if (idCategory == null) {
             return "redirect:/";
         }
 
         List<Potion> potions = new ArrayList<>();
         // load restoration category and get all its potions
-        Optional<Category> optionalCategory = categoryRepository.findById(categoryId);
+        Optional<Category> optionalCategory = categoryRepository.findById(idCategory);
         if (optionalCategory.isPresent()) {
             potions = optionalCategory.get().getPotions();
         }
         out.addAttribute("potions", potions);
 
         return "potions";
+    }
+
+    @GetMapping("/potion/remove")
+    public String removePotion(@RequestParam(required = false) Long idCategory,
+                               @RequestParam(required = false) Long idPotion) {
+
+        if (idCategory == null || idPotion != null) {
+            potionRepository.deleteById(idPotion);
+        }
+
+        return "redirect:/potions?idCategory=" + idCategory;
     }
 }

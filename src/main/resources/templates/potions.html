@@ -32,6 +32,7 @@
         <th>Id</th>
         <th>Name</th>
         <th>Power</th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
@@ -39,6 +40,9 @@
         <td th:text="${potion.id}">id</td>
         <td th:text="${potion.name}">name</td>
         <td th:text="${potion.power}">power</td>
+        <td>
+            <a th:href="@{/potion/remove(idCategory=${potion.category.id},idPotion=${potion.id})}">delete</a>
+        </td>
     </tr>
     </tbody>
 </table>
