@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Restoration potions</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        th, td {
+            border-bottom: 1px solid #ddd;
+            padding: 10px 5px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+<h3>Restoration potions</h3>
+<table>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Power</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="potion : ${potions}">
+        <td th:text="${potion.id}">id</td>
+        <td th:text="${potion.name}">name</td>
+        <td th:text="${potion.power}">power</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
