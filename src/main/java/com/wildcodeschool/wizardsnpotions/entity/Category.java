@@ -1,7 +1,6 @@
 package com.wildcodeschool.wizardsnpotions.entity;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -13,7 +12,7 @@ public class Category {
     private String title;
 
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
-    private List<Potion> potions = new ArrayList<>();
+    private List<Potion> potions;
 
     public Category() {
     }
