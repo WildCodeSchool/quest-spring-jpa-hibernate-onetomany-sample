@@ -11,8 +11,8 @@ public class Potion {
     private String name;
     private Integer power;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "category_id")
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH, optional = false)
+    @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
     public Potion() {
